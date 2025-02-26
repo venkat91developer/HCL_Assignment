@@ -13,13 +13,13 @@ export class WebService {
     gotoRoute(path:string){
       this.route.navigateByUrl(path);
     }
-    addProgram(data: FormData): Observable<any> {
+    addProgram(data: any): Observable<any> {
       return this.http.post(`${this.apiUrl}programs`, data);
     }
     getProgram(): Observable<any> {
       return this.http.get(`${this.apiUrl}programs`);
     }
-    updateProgram(data:FormData,id:any): Observable<any> {
+    updateProgram(data:any,id:any): Observable<any> {
       return this.http.put(`${this.apiUrl}programs/${id}`, data);
     }
     deleteProgram(id:any): Observable<any> {

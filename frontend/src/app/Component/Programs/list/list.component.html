@@ -21,12 +21,17 @@
           <td>{{ program.endDate }}</td>
           <td>{{ program.budget | currency }}</td>
           <td>
-            <a [routerLink]="['/program/edit', program.id]" class="edit-btn">Edit</a>
-            <button (click)="deleteProgram(program.id)" class="delete-btn">Delete</button>
+            <a [routerLink]="['/program/edit', program._id]" class="edit-btn">Edit</a>
+            <button (click)="deleteProgram(program._id)" class="delete-btn">Delete</button>
           </td>
         </tr>
+        
       </tbody>
+    
     </table>
+    <div *ngIf="programs.length==0" class="no-item">
+      No program is available
+    </div>
   
     <div class="pagination">
       <button *ngFor="let page of [].constructor(totalPages); let i = index" (click)="changePage(i+1)" [class.active]="currentPage === i+1">

@@ -11,8 +11,8 @@
 
     <!-- Navigation Menu -->
     <nav [ngClass]="{ 'block': isMenuOpen, 'hidden': !isMenuOpen }" class="nav-menu flex gap-4">
-      <a *ngIf="isLoggedIn" routerLink="/program-list" class="nav-link p-2 hover:bg-blue-700 rounded">Programs</a>
-      <a *ngIf="isLoggedIn" routerLink="/participant-list" class="nav-link p-2 hover:bg-blue-700 rounded">Participants</a>
+      <a *ngIf="isLoggedIn" routerLink="/program" class="nav-link p-2 hover:bg-blue-700 rounded">Programs</a>
+      <a *ngIf="isLoggedIn" routerLink="/participant" class="nav-link p-2 hover:bg-blue-700 rounded">Participants</a>
 
       <!-- Show "Register" on /login, otherwise show "Login" -->
       <a *ngIf="!isLoggedIn && isLoginPage" routerLink="/register" class="nav-link p-2 hover:bg-blue-700 rounded">Register</a>

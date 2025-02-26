@@ -1,5 +1,6 @@
 import * as express from "express";
 import * as dotenv from "dotenv";
+const cors = require('cors');
 import { connectMongoDB, connectMySQLDB } from "./config/connect.db";
 import programRoutes from "./router/program.routes";
 import auditRoutes from "./router/audit.routes";
@@ -11,7 +12,20 @@ const appAudit = express();
 
 const PORT_PROGRAM = Number(process.env.PORT_PROGRAM) || 3000;
 const PORT_AUDIT = Number(process.env.PORT_AUDIT) || 4000;
-
+appProgram.use(
+cors({
+    origin: '*', 
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+    allowedHeaders: ['Content-Type', 'Authorization'],
+})
+);
+appAudit.use(
+cors({
+    origin: '*', 
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+    allowedHeaders: ['Content-Type', 'Authorization'], 
+})
+);
 appProgram.use(express.json());
 appAudit.use(express.json());
 

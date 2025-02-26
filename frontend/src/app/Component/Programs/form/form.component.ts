@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-
+import { WebService } from '../../../Service/web.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-form',
   standalone: true,
@@ -19,7 +20,8 @@ export class ProgramFormComponent {
     private fb: FormBuilder,
     private http: HttpClient,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private Service:WebService
   ) {
     this.programForm = this.fb.group({
       name: ['', Validators.required],
@@ -41,15 +43,36 @@ export class ProgramFormComponent {
 
   saveProgram() {
     if (this.programForm.valid) {
+      const programData = {
+        name: this.programForm.get('name')?.value,
+        description: this.programForm.get('description')?.value,
+        startDate: this.programForm.get('startDate')?.value,
+        endDate: this.programForm.get('endDate')?.value,
+        budget: this.programForm.get('budget')?.value
+      };
+  
       if (this.programId) {
-        this.http.put(`/api/programs/${this.programId}`, this.programForm.value).subscribe(() => {
-          this.router.navigate(['/programs']);
+        // Update existing program
+        this.Service.updateProgram(programData,this.programId).subscribe(() => {
+          this.router.navigate(['/program']);
         });
       } else {
-        this.http.post('/api/programs', this.programForm.value).subscribe(() => {
-          this.router.navigate(['/programs']);
+        // Add new program using WebService
+        this.Service.addProgram(programData).subscribe(async (data) => {
+          try {
+            const response = data;
+            console.log(response)
+            if(response.success) {
+              await Swal.fire('',response.message, 'success');
+              this.router.navigate(['/program']);
+            }
+          } catch (error) {
+            await Swal.fire('',JSON.stringify(error), 'error');
+          }
         });
       }
     }
   }
+  
+  
 }

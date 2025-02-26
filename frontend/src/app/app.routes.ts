@@ -25,7 +25,7 @@ export const routes: Routes = [
         component:ForgetPasswordComponent
     },
     {
-        path:'program-list',
+        path:'program',
         component:ProgramListComponent
     },
     {
@@ -33,11 +33,11 @@ export const routes: Routes = [
         component:ProgramFormComponent
     },
     {
-        path:'program/edit',
+        path:'program/edit/:id',
         component:ProgramFormComponent
     },
     {
-        path:'participant-list',
+        path:'participant',
         component:ParticipantListComponent
     },
     {
@@ -45,7 +45,7 @@ export const routes: Routes = [
         component:ParticipantFormComponent
     },
     {
-        path:'participant/edit',
+        path:'participant/edit/:id',
         component:ParticipantFormComponent
     },
 ];
