@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { WebService } from '../../Service/web.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-program',
   standalone: true,
-  imports: [],
+  imports: [CommonModule,ReactiveFormsModule],
   templateUrl: './program.component.html',
   styleUrl: './program.component.scss'
 })
@@ -15,6 +16,7 @@ export class ProgramComponent {
   selectedFile: File | null = null;
 
   constructor(private fb: FormBuilder, private programService: WebService) {
+    console.log('working..')
     this.programForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],

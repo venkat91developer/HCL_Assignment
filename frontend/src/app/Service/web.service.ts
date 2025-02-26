@@ -6,12 +6,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class WebService {
-    private apiUrl = 'http://localhost:3000/programs';
+    private apiUrl = 'http://localhost:3000/api/v1/';
   
     constructor(private http: HttpClient) {}
   
     addProgram(data: FormData): Observable<any> {
-      return this.http.post(`${this.apiUrl}/add`, data);
+      return this.http.post(`${this.apiUrl}programs/add`, data);
     }
 }
 

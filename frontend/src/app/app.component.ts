@@ -7,24 +7,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-root',
   imports:[CommonModule,FormsModule],
   standalone:true,
-  template: `
-    <h1>Research Participants</h1>
-    <form (submit)="addParticipant()">
-      <input [(ngModel)]="newParticipant.name" placeholder="Name" required [ngModelOptions]="{standalone: true}">
-      <input [(ngModel)]="newParticipant.age" type="number" placeholder="Age" required [ngModelOptions]="{standalone: true}">
-      <input [(ngModel)]="newParticipant.email" type="email" placeholder="Email" required [ngModelOptions]="{standalone: true}">
-      <input [(ngModel)]="newParticipant.dateJoined" type="date" required [ngModelOptions]="{standalone: true}">
-      <input [(ngModel)]="newParticipant.medicalResearchProgram" placeholder="Program" required [ngModelOptions]="{standalone: true}">
-      <button type="submit">Add Participant</button>
-    </form>
-    
-    <ul>
-      <li *ngFor="let participant of participants">
-        {{ participant.name }} - {{ participant.age }} - {{ participant.email }}
-        <button (click)="deleteParticipant(participant._id)">Delete</button>
-      </li>
-    </ul>
-  `,
+  template: ``,
   styles: []
 })
 export class AppComponent implements OnInit {
@@ -38,7 +21,7 @@ export class AppComponent implements OnInit {
   }
 
   loadParticipants() {
-    this.http.get<any[]>('http://localhost:3000/participants').subscribe(data => this.participants = data);
+    // this.http.get<any[]>('http://localhost:3000/participants').subscribe(data => this.participants = data);
   }
 
   addParticipant() {
