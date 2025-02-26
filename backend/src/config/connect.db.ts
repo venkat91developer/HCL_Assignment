@@ -20,7 +20,7 @@ export async function connectMongoDB() {
         throw error;
     }
 }
-// MySQL Connection
+// MySQL Connection - String Binding
 export const mysqlPool = mysql.createPool({
     host: process.env.MYSQL_DB_HOST || "localhost",
     user: process.env.MYSQL_DB_USER || "root",

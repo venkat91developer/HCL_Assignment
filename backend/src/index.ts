@@ -1,7 +1,8 @@
 import * as express from "express";
 import * as dotenv from "dotenv";
-import programRoutes from "./router/program.routes";
 import { connectMongoDB, connectMySQLDB } from "./config/connect.db";
+import programRoutes from "./router/program.routes";
+import auditRoutes from "./router/audit.routes";
 
 dotenv.config();
 
@@ -23,7 +24,7 @@ async function startServer() {
         appAudit.locals.mysqlPool = mysqlDB;
 
         appProgram.use("/api/v1/programs", programRoutes);
-        appAudit.use("/api/v1/audit-logs", programRoutes);
+        appAudit.use("/api/v1/audit-logs", auditRoutes);
 
         appProgram.listen(PORT_PROGRAM, () => {
             console.log(`Server Program running on port ${PORT_PROGRAM}`);
