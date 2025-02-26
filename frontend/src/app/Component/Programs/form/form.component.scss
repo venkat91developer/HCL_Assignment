@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container {
+  @apply p-6 bg-white shadow-lg rounded-lg max-w-3xl mx-auto mt-10;
+}
+
+.title {
+  @apply text-2xl font-bold mb-4;
+}
+
+.form {
+  @apply space-y-4;
+}
+
+.input {
+  @apply w-full p-2 border rounded;
+}
+
+.submit-btn {
+  @apply bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 transition;
+}

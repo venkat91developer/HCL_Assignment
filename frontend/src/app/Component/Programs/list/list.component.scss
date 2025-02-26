@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container {
+  @apply p-6 bg-white shadow-lg rounded-lg max-w-5xl mx-auto mt-10;
+}
+
+.title {
+  @apply text-2xl font-bold mb-4;
+}
+
+.add-btn {
+  @apply bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 transition float-right mb-4;
+}
+
+.table {
+  @apply w-full border-collapse border border-gray-300;
+}
+
+th, td {
+  @apply border border-gray-300 px-4 py-2 text-center;
+}
+
+.edit-btn {
+  @apply text-blue-500 hover:underline mr-2;
+}
+
+.delete-btn {
+  @apply text-red-500 hover:underline;
+}
+
+.pagination {
+  @apply mt-4 flex justify-center space-x-2;
+}
+
+.pagination button {
+  @apply px-3 py-1 border rounded hover:bg-gray-200 transition;
+}
+
+.pagination .active {
+  @apply bg-blue-500 text-white;
+}

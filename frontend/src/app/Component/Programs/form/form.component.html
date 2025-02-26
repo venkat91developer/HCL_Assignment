@@ -1,0 +1,14 @@
+<div class="container">
+    <h2 class="title">{{ programId ? 'Edit' : 'Add' }} Program</h2>
+  
+    <form [formGroup]="programForm" (ngSubmit)="saveProgram()" class="form">
+      <input type="text" formControlName="name" placeholder="Program Name" class="input">
+      <textarea formControlName="description" placeholder="Description" class="input"></textarea>
+      <input type="date" formControlName="startDate" class="input">
+      <input type="date" formControlName="endDate" class="input">
+      <input type="number" formControlName="budget" placeholder="Budget" class="input">
+  
+      <button type="submit" class="submit-btn">{{ programId ? 'Update' : 'Create' }} Program</button>
+    </form>
+  </div>
+  
