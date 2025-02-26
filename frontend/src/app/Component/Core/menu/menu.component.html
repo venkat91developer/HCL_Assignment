@@ -1,0 +1,12 @@
+<aside class="sidebar">
+    <button (click)="toggleMenu()" class="menu-toggle">
+      ☰ Menu
+    </button>
+    <nav [ngClass]="{ 'hidden': !isMenuOpen, 'block': isMenuOpen }" class="nav-links">
+      <a routerLink="/dashboard" class="nav-link">Dashboard</a>
+      <a routerLink="/programs" class="nav-link">Programs</a>
+      <a routerLink="/participants" class="nav-link">Participants</a>
+      <a routerLink="/settings" class="nav-link">Settings</a>
+    </nav>
+  </aside>
+  

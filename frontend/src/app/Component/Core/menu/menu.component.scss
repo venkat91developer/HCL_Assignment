@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.sidebar {
+  @apply bg-gray-900 text-white w-64 h-screen fixed left-0 top-0 flex flex-col;
+}
+
+.menu-toggle {
+  @apply text-white text-lg p-4 bg-gray-800 cursor-pointer md:hidden;
+}
+
+.nav-links {
+  @apply mt-4 space-y-2;
+}
+
+.nav-link {
+  @apply block px-4 py-2 hover:bg-gray-700 transition-all;
+}

@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.footer {
+  @apply bg-gray-800 text-white text-center py-4 mt-10;
+}
+
+.container {
+  @apply max-w-6xl mx-auto;
+}
