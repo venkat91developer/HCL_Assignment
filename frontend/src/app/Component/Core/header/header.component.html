@@ -1,6 +1,6 @@
 <header class="header bg-blue-600 text-white p-4 shadow-md">
   <div class="container flex justify-between items-center">
-    <a routerLink="/" class="logo text-2xl font-bold">Research Management</a>
+    <a routerLink="/" class="logo text-2xl font-bold">Medical Research Management</a>
 
     <!-- Mobile Menu Button -->
     <button (click)="toggleMenu()" class="menu-button p-2">
@@ -11,8 +11,8 @@
 
     <!-- Navigation Menu -->
     <nav [ngClass]="{ 'block': isMenuOpen, 'hidden': !isMenuOpen }" class="nav-menu flex gap-4">
-      <a *ngIf="isLoggedIn" routerLink="/programs" class="nav-link p-2 hover:bg-blue-700 rounded">Programs</a>
-      <a *ngIf="isLoggedIn" routerLink="/participants" class="nav-link p-2 hover:bg-blue-700 rounded">Participants</a>
+      <a *ngIf="isLoggedIn" routerLink="/program-list" class="nav-link p-2 hover:bg-blue-700 rounded">Programs</a>
+      <a *ngIf="isLoggedIn" routerLink="/participant-list" class="nav-link p-2 hover:bg-blue-700 rounded">Participants</a>
 
       <!-- Show "Register" on /login, otherwise show "Login" -->
       <a *ngIf="!isLoggedIn && isLoginPage" routerLink="/register" class="nav-link p-2 hover:bg-blue-700 rounded">Register</a>

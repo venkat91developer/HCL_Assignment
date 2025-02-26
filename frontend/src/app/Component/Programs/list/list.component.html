@@ -1,6 +1,6 @@
 <div class="container">
     <h2 class="title">Programs</h2>
-    <a routerLink="/programs/add" class="add-btn">+ Add Program</a>
+    <a routerLink="/program/add" class="add-btn">+ Add Program</a>
   
     <table class="table">
       <thead>
@@ -21,7 +21,7 @@
           <td>{{ program.endDate }}</td>
           <td>{{ program.budget | currency }}</td>
           <td>
-            <a [routerLink]="['/programs/edit', program.id]" class="edit-btn">Edit</a>
+            <a [routerLink]="['/program/edit', program.id]" class="edit-btn">Edit</a>
             <button (click)="deleteProgram(program.id)" class="delete-btn">Delete</button>
           </td>
         </tr>

@@ -1,6 +1,6 @@
 <div class="container">
     <h2 class="title">Participants</h2>
-    <a routerLink="/participants/add" class="add-btn">+ Add Participant</a>
+    <a routerLink="/participant/add" class="add-btn">+ Add Participant</a>
   
     <table class="table">
       <thead>
@@ -19,7 +19,7 @@
           <td>{{ participant.enrollmentDate }}</td>
           <td>{{ participant.medicalReport }}</td>
           <td>
-            <a [routerLink]="['/participants/edit', participant.id]" class="edit-btn">Edit</a>
+            <a [routerLink]="['/participant/edit', participant.id]" class="edit-btn">Edit</a>
             <button (click)="deleteParticipant(participant.id)" class="delete-btn">Delete</button>
           </td>
         </tr>

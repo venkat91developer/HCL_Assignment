@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 .container {
+  min-height: 80vh;
+  margin-top: 5em !important;
   @apply p-6 bg-white shadow-lg rounded-lg max-w-3xl mx-auto mt-10;
 }
 

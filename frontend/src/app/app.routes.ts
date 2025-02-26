@@ -29,7 +29,11 @@ export const routes: Routes = [
         component:ProgramListComponent
     },
     {
-        path:'program-form',
+        path:'program/add',
+        component:ProgramFormComponent
+    },
+    {
+        path:'program/edit',
         component:ProgramFormComponent
     },
     {
@@ -37,7 +41,11 @@ export const routes: Routes = [
         component:ParticipantListComponent
     },
     {
-        path:'participant-form',
+        path:'participant/add',
+        component:ParticipantFormComponent
+    },
+    {
+        path:'participant/edit',
         component:ParticipantFormComponent
     },
 ];
