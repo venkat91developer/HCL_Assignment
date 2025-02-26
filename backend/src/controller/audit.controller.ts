@@ -5,7 +5,7 @@ export const AuditDeleteLogsController = async (req: Request, res: Response) => 
     try {
         const connection = await mysqlPool.getConnection();
         const [rows] = await connection.query(
-            "SELECT id, entity_id AS deletedEntityId, entity_type AS entityType, deletedAt, deletedBy FROM audit_logs WHERE event = 'participant_deleted' ORDER BY deletedAt DESC"
+            "SELECT id, entity_id AS deletedEntityId, entity_type AS entityType, deletedAt, deletedBy FROM audit_log WHERE event = 'participant_deleted' ORDER BY deletedAt DESC"
         );
         connection.release();
 
