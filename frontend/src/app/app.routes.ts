@@ -5,15 +5,19 @@ import { RegisterComponent } from './Component/Auth/register/register.component'
 
 export const routes: Routes = [
     {
-        path:'\login',
+        path:'',
         component:LoginComponent
     },
     {
-        path:'\register',
+        path:'login',
+        component:LoginComponent
+    },
+    {
+        path:'register',
         component:RegisterComponent
     },
     {
-        path:'\forget-password',
+        path:'forgot-password',
         component:ForgetPasswordComponent
     },
 ];

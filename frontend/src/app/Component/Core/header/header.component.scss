@@ -23,5 +23,6 @@
 }
 
 .nav-link {
+  cursor: pointer;
   @apply block px-4 py-2 md:inline-block md:ml-6 hover:bg-blue-700 md:hover:bg-transparent;
 }

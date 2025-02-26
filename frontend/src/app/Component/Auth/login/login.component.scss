@@ -1,5 +1,6 @@
 .login-container {
-  @apply flex items-center justify-center min-h-screen bg-gray-100;
+  min-height: 91vh;
+  @apply flex items-center justify-center bg-gray-100;
 }
 
 .login-box {

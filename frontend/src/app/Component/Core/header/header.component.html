@@ -1,18 +1,12 @@
 <header class="header">
     <div class="container">
-      <a routerLink="/" class="logo">Research Management</a>
+      <a routerLink="/" class="logo">Medical - Research Management</a>
   
       <button (click)="toggleMenu()" class="menu-button">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
         </svg>
       </button>
-  
-      <nav [ngClass]="{ 'block': isMenuOpen, 'hidden': !isMenuOpen }" class="nav-menu">
-        <a routerLink="/programs" class="nav-link">Programs</a>
-        <a routerLink="/participants" class="nav-link">Participants</a>
-        <a routerLink="/login" class="nav-link">Login</a>
-      </nav>
     </div>
   </header>
   
