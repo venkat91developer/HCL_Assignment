@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 interface Program {
   id: string;
@@ -13,11 +15,11 @@ interface Program {
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [],
+  imports: [RouterModule,CommonModule],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
 })
-export class ListComponent {
+export class ProgramListComponent {
   programs: Program[] = [];
   currentPage = 1;
   itemsPerPage = 5;

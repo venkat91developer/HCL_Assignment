@@ -1,12 +1,24 @@
-<header class="header">
-    <div class="container">
-      <a routerLink="/" class="logo">Medical - Research Management</a>
-  
-      <button (click)="toggleMenu()" class="menu-button">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-        </svg>
-      </button>
-    </div>
-  </header>
-  
+<header class="header bg-blue-600 text-white p-4 shadow-md">
+  <div class="container flex justify-between items-center">
+    <a routerLink="/" class="logo text-2xl font-bold">Research Management</a>
+
+    <!-- Mobile Menu Button -->
+    <button (click)="toggleMenu()" class="menu-button p-2">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+      </svg>
+    </button>
+
+    <!-- Navigation Menu -->
+    <nav [ngClass]="{ 'block': isMenuOpen, 'hidden': !isMenuOpen }" class="nav-menu flex gap-4">
+      <a *ngIf="isLoggedIn" routerLink="/programs" class="nav-link p-2 hover:bg-blue-700 rounded">Programs</a>
+      <a *ngIf="isLoggedIn" routerLink="/participants" class="nav-link p-2 hover:bg-blue-700 rounded">Participants</a>
+
+      <!-- Show "Register" on /login, otherwise show "Login" -->
+      <a *ngIf="!isLoggedIn && isLoginPage" routerLink="/register" class="nav-link p-2 hover:bg-blue-700 rounded">Register</a>
+      <a *ngIf="!isLoggedIn && !isLoginPage" routerLink="/login" class="nav-link p-2 hover:bg-blue-700 rounded">Login</a>
+
+      <button *ngIf="isLoggedIn" (click)="logout()" class="nav-link p-2 hover:bg-red-600 rounded">Logout</button>
+    </nav>
+  </div>
+</header>

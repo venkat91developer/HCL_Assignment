@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 interface Participant {
   id: string;
@@ -13,11 +15,11 @@ interface Participant {
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [],
+  imports: [RouterModule,CommonModule],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
 })
-export class ListComponent {
+export class ParticipantListComponent {
   participants: Participant[] = [];
   currentPage = 1;
   itemsPerPage = 5;
