@@ -23,7 +23,8 @@ export class RegisterComponent {
 
   register() {
     if (this.registerForm.valid) {
-      console.log(this.registerForm.value);
+      // console.log(this.registerForm.value);
+      this
     }
   }
 }

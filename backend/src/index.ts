@@ -4,6 +4,7 @@ const cors = require('cors');
 import { connectMongoDB, connectMySQLDB } from "./config/connect.db";
 import programRoutes from "./router/program.routes";
 import auditRoutes from "./router/audit.routes";
+import userRoutes from "./router/user.routes";
 
 dotenv.config();
 
@@ -39,6 +40,7 @@ async function startServer() {
 
         appProgram.use("/api/v1/programs", programRoutes);
         appAudit.use("/api/v1/audit-logs", auditRoutes);
+        appProgram.use("/api/v1/user", userRoutes);
 
         appProgram.listen(PORT_PROGRAM, () => {
             console.log(`Server Program running on port ${PORT_PROGRAM}`);
