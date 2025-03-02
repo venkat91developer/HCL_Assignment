@@ -3,7 +3,7 @@
     <a routerLink="/program/add" class="add-btn">+ Add Program</a>
   
     <table class="table">
-      <thead>
+      <thead *ngIf="programs.length!==0">
         <tr>
           <th>Name</th>
           <th>Description</th>
@@ -13,7 +13,7 @@
           <th>Actions</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody >
         <tr *ngFor="let program of programs.slice((currentPage-1) * itemsPerPage, currentPage * itemsPerPage)">
           <td>{{ program.name }}</td>
           <td>{{ program.description }}</td>

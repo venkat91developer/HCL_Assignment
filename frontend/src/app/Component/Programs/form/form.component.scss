@@ -23,3 +23,7 @@
 .submit-btn {
   @apply bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 transition;
 }
+input[type="date"]::before {
+  content: attr(placeholder);
+  color: #999;
+}

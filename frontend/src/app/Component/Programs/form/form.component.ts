@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { WebService } from '../../../Service/web.service';
 import { AlertService } from '../../../Service/alert.service';
@@ -13,13 +12,13 @@ import { AlertService } from '../../../Service/alert.service';
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss'
 })
-export class ProgramFormComponent {
+export class ProgramFormComponent implements OnInit {
   programForm: FormGroup;
   programId: string | null = null;
+  minDate: any = new Date().toISOString().split('T')[0]; // Current date
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
     private Service: WebService,
@@ -43,34 +42,49 @@ export class ProgramFormComponent {
         }
       });
     }
+
+    // Ensure end date is always after start date
+    this.programForm.get('startDate')?.valueChanges.subscribe(startDate => {
+      this.programForm.get('endDate')?.setValidators([
+        Validators.required,
+        (control) => control.value > startDate ? null : { invalidEndDate: true }
+      ]);
+      this.programForm.get('endDate')?.updateValueAndValidity();
+    });
   }
 
   saveProgram() {
-    if (this.programForm.valid) {
-      const programData = this.programForm.value;
+    if (this.programForm.invalid) {
+      this.Alert.error('All fields are required!');
+      return;
+    }
 
-      if (this.programId) {
-        // Update existing program
-        this.Service.updateProgram(programData, this.programId).subscribe(() => {
-          this.Alert.success('Program updated successfully');
-          this.router.navigate(['/program']);
-        });
-      } else {
-        // Add new program using WebService
-        this.Service.addProgram(programData).subscribe(
-          (data) => {
-            if (data.success) {
-              this.Alert.success('Success', data.message);
-              this.router.navigate(['/program']);
-            } else {
-              this.Alert.error('Failed to add program')
-            }
-          },
-          (error) => {
-            this.Alert.error(JSON.stringify(error));
+    const programData = this.programForm.value;
+
+    if (programData.endDate <= programData.startDate) {
+      this.Alert.error('End date must be after start date!');
+      return;
+    }
+
+    if (this.programId) {
+      this.Service.updateProgram(programData, this.programId).subscribe(() => {
+        this.Alert.success('Program updated successfully');
+        this.router.navigate(['/program']);
+      });
+    } else {
+      this.Service.addProgram(programData).subscribe(
+        (data) => {
+          if (data.success) {
+            this.Alert.success(data.message);
+            this.router.navigate(['/program']);
+          } else {
+            this.Alert.error("Failed to add program");
           }
-        );
-      }
+        },
+        (error) => {
+          this.Alert.error(JSON.stringify(error));
+        }
+      );
     }
   }
 }

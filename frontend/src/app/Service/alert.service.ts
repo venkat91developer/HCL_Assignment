@@ -5,7 +5,7 @@ import { Injectable } from "@angular/core";
   providedIn: "root",
 })
 export class AlertService {
-  success(message: string, title: string = "Success") {
+  success(message: string, title: string = "") {
     Swal.fire({
       title,
       text: message,
@@ -15,7 +15,7 @@ export class AlertService {
     });
   }
 
-  error(message: string, title: string = "Error") {
+  error(message: string, title: string = "") {
     Swal.fire({
       title,
       text: message,
@@ -25,7 +25,7 @@ export class AlertService {
     });
   }
 
-  warning(message: string, title: string = "Warning") {
+  warning(message: string, title: string = "") {
     Swal.fire({
       title,
       text: message,
@@ -35,7 +35,7 @@ export class AlertService {
     });
   }
 
-  info(message: string, title: string = "Info") {
+  info(message: string, title: string = "") {
     Swal.fire({
       title,
       text: message,
@@ -45,7 +45,7 @@ export class AlertService {
     });
   }
 
-  confirm(message: string, title: string = "Are you sure?"): Promise<boolean> {
+  confirm(message: string, title: string = ""): Promise<boolean> {
     return Swal.fire({
       title,
       text: message,
