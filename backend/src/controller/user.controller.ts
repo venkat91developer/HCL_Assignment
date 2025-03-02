@@ -25,7 +25,7 @@ export const createUserController = async (req: Request, res: Response): Promise
 };
 export const loginController = async (req: Request, res: Response): Promise<void> => {
     try {
-        const userData = await validateUserLogin(req.body.username,req.body.password) ;
+        const userData = await validateUserLogin(req.body.email,req.body.password) ;
         const response: ResponseInterface = {
             code: 200,
             payload: [userData],

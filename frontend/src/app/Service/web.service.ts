@@ -44,7 +44,7 @@ export class WebService {
       return this.http.get(`${this.apiUrl}user/checkEmail?email=${email}`);
     }
     login(data:any) {
-      return this.http.get(`${this.apiUrl}user/login`,data);
+      return this.http.post(`${this.apiUrl}user/login`,data);
     }
     getUserInfo(id:any) {
       return this.http.get(`${this.apiUrl}user/getUser/${id}`);
