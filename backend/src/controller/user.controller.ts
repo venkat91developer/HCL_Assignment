@@ -65,16 +65,16 @@ export const getUserController = async (req: Request, res: Response): Promise<vo
         res.status(500).json(response);
     }
 };
-export const checkUserNameController = async (req: Request, res: Response): Promise<void> => {
+export const checkEmailController = async (req: Request, res: Response): Promise<void> => {
     try {
-        const username = (req.query.username)?.toString() || "";
+        const username = (req.query.email)?.toString() || "";
         const userData = await checkUsernameExists(username) ;
         if(userData){
              const response: ResponseInterface = {
                 code: 200,
                 payload: [],
                 success: false,
-                message: "Username Existing..."
+                message: "Email Existing..."
             };
             res.status(404).json(response);
         } else {
@@ -82,7 +82,7 @@ export const checkUserNameController = async (req: Request, res: Response): Prom
                 code: 200,
                 payload: [],
                 success: true,
-                message: "Username not Existing..."
+                message: "Email not Existing..."
             };
             res.status(200).json(response);
         }
