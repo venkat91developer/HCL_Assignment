@@ -37,8 +37,17 @@ export class WebService {
     deleteParticipant(id:any): Observable<any> {
       return this.http.delete(`${this.apiUrl}programs/${id}`);
     }
-    registerUser(data:){
-
+    registerUser(data:any) {
+      return this.http.post(`${this.apiUrl}user/createUser`,data);
+    }
+    checkEmailExists(email:any) {
+      return this.http.get(`${this.apiUrl}user/checkEmail?email=${email}`);
+    }
+    login(data:any) {
+      return this.http.get(`${this.apiUrl}user/login`,data);
+    }
+    getUserInfo(id:any) {
+      return this.http.get(`${this.apiUrl}user/getUser/${id}`);
     }
 }
 
