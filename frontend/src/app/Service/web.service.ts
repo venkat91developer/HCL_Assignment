@@ -19,10 +19,13 @@ export class WebService {
     getProgram(): Observable<any> {
       return this.http.get(`${this.apiUrl}programs`);
     }
-    updateProgram(data:any,id:any): Observable<any> {
+    getProgramById(id:string): Observable<any> {
+      return this.http.get(`${this.apiUrl}programs/${id}`);
+    }
+    updateProgram(data:any,id:string): Observable<any> {
       return this.http.put(`${this.apiUrl}programs/${id}`, data);
     }
-    deleteProgram(id:any): Observable<any> {
+    deleteProgram(id:string): Observable<any> {
       return this.http.delete(`${this.apiUrl}programs/${id}`);
     }
     addParticipant(data: FormData): Observable<any> {
@@ -31,10 +34,13 @@ export class WebService {
     getParticipant(): Observable<any> {
       return this.http.get(`${this.apiUrl}programs/participant`);
     }
-    updateParticipant(data:FormData,id:any): Observable<any> {
+    getParticipantById(id:string): Observable<any> {
+      return this.http.get(`${this.apiUrl}programs/participant/${id}`);
+    }
+    updateParticipant(data:FormData,id:string): Observable<any> {
       return this.http.put(`${this.apiUrl}programs/participant/${id}`, data);
     }
-    deleteParticipant(id:any): Observable<any> {
+    deleteParticipant(id:string): Observable<any> {
       return this.http.delete(`${this.apiUrl}programs/${id}`);
     }
     registerUser(data:any) {
@@ -46,7 +52,7 @@ export class WebService {
     login(data:any) {
       return this.http.post(`${this.apiUrl}user/login`,data);
     }
-    getUserInfo(id:any) {
+    getUserInfo(id:string) {
       return this.http.get(`${this.apiUrl}user/getUser/${id}`);
     }
 }

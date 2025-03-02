@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
-import { insertProgram, updateProgram, deleteProgram, getAllPrograms } from "../model/program.model";
+import { insertProgram, updateProgram, deleteProgram, getAllPrograms, getProgramById } from "../model/program.model";
 import { insertParticipant, updateParticipant, deleteParticipant, getAllParticipants } from "../model/program.model";
 import { ResponseInterface } from "./common.interface";
 import { logAuditEvent } from "../model/audit.model";
@@ -26,7 +26,27 @@ export const getProgramController = async (req: Request, res: Response): Promise
         res.status(500).json(response);
     }
 };
-
+export const getProgramByIdController = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const programs = await getProgramById(req.params.id);
+        const response: ResponseInterface = {
+            code: 200,
+            payload: [programs],
+            success: true,
+            message: `Get ${req.params.id} Programs successfully`
+        };
+        res.status(200).json(response);
+    } catch (error) {
+        const response: ResponseInterface = {
+            code: 500,
+            payload: [error],
+            success: false,
+            message: "Server error",
+            error
+        };
+        res.status(500).json(response);
+    }
+};
 export const addProgramController = async (req: Request, res: Response): Promise<void> => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

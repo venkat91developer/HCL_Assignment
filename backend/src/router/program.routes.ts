@@ -8,6 +8,7 @@ import {
     editParticipantController, 
     editProgramController, 
     getParticipantsController, 
+    getProgramByIdController, 
     getProgramController 
 } from "../controller/program.controller";
 
@@ -31,6 +32,7 @@ const participantValidationRules = [
 
 // Routes
 router.get("/", getProgramController);
+router.get("/:id", getProgramByIdController);
 router.post("/", programValidationRules, addProgramController);
 router.put("/:id", programValidationRules, editProgramController);
 router.delete("/:id", deleteProgramController);
