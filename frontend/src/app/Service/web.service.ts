@@ -29,16 +29,16 @@ export class WebService {
       return this.http.delete(`${this.apiUrl}programs/${id}`);
     }
     addParticipant(data: FormData): Observable<any> {
-      return this.http.post(`${this.apiUrl}programs/participant`, data);
+      return this.http.post(`${this.apiUrl}participant`, data);
     }
     getParticipant(): Observable<any> {
-      return this.http.get(`${this.apiUrl}programs/participant`);
+      return this.http.get(`${this.apiUrl}participant`);
     }
     getParticipantById(id:string): Observable<any> {
-      return this.http.get(`${this.apiUrl}programs/participant/${id}`);
+      return this.http.get(`${this.apiUrl}participant/${id}`);
     }
     updateParticipant(data:FormData,id:string): Observable<any> {
-      return this.http.put(`${this.apiUrl}programs/participant/${id}`, data);
+      return this.http.put(`${this.apiUrl}participant/${id}`, data);
     }
     deleteParticipant(id:string): Observable<any> {
       return this.http.delete(`${this.apiUrl}programs/${id}`);
