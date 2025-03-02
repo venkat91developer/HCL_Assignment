@@ -5,12 +5,12 @@ import { connectMongoDB, connectMySQLDB } from "./config/connect.db";
 import programRoutes from "./router/program.routes";
 import auditRoutes from "./router/audit.routes";
 import userRoutes from "./router/user.routes";
+import participantRoutes from "./router/participant.routes";
 
 dotenv.config();
 
 const appProgram = express();
 const appAudit = express();
-
 const PORT_PROGRAM = Number(process.env.PORT_PROGRAM) || 3000;
 const PORT_AUDIT = Number(process.env.PORT_AUDIT) || 4000;
 appProgram.use(
@@ -36,12 +36,15 @@ async function startServer() {
         const mysqlDB = await connectMySQLDB();
 
         appProgram.locals.mongoDB = mongoDB;
+        appProgram.locals.mongoDB = mongoDB;
         appAudit.locals.mysqlPool = mysqlDB;
         console.log('index file')
         appProgram.use("/api/v1/programs", programRoutes);
-        appAudit.use("/api/v1/audit-logs", auditRoutes);
         appProgram.use("/api/v1/user", userRoutes);
+        appProgram.use("/api/v1/participant", participantRoutes);
 
+        appAudit.use("/api/v1/audit-logs", auditRoutes);
+        
         appProgram.listen(PORT_PROGRAM, () => {
             console.log(`Server Program running on port ${PORT_PROGRAM}`);
         });
