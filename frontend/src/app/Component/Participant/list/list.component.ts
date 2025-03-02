@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { WebService } from '../../../Service/web.service';
+import Swal from 'sweetalert2';
 
 interface Participant {
   _id: string;
@@ -39,21 +40,25 @@ export class ParticipantListComponent implements OnInit {
       }
     });
   }
-
-  deleteParticipant(id: string) {
+ async deleteParticipant(id: string) {
     if(id){
-      this.service.deleteParticipant(id).subscribe(() => {
-        this.participants = this.participants.filter((p) => p._id !== id);
-        this.totalPages = Math.ceil(this.participants.length / this.itemsPerPage);
-        
-        // Adjust current page if the last item on the last page is removed
-        if (this.currentPage > this.totalPages) {
-          this.currentPage = this.totalPages || 1;
-        }
+      Swal.fire({
+        title: "Do you want to delete the record?",
+        showDenyButton: true,
+        confirmButtonText: "Yes",
+        denyButtonText: `No`
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.service.deleteParticipant(id).subscribe(async (response) => {
+            if(response.success) {
+              await Swal.fire('',response.message, 'success');
+              this.fetchParticipants();
+            }
+          });
+        } 
       });
     }
   }
-
   changePage(page: number) {
     this.currentPage = page;
   }

@@ -41,7 +41,7 @@ export class WebService {
       return this.http.put(`${this.apiUrl}participant/${id}`, data);
     }
     deleteParticipant(id:string): Observable<any> {
-      return this.http.delete(`${this.apiUrl}programs/${id}`);
+      return this.http.delete(`${this.apiUrl}participant/${id}`);
     }
     registerUser(data:any) {
       return this.http.post(`${this.apiUrl}user/createUser`,data);

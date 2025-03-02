@@ -9,16 +9,8 @@ import {
 } from "../controller/participant.controller";
 const router = Router();
 
-const participantAddValidationRules = [
+const participantValidationRules = [
     check("programId").notEmpty().withMessage("Invalid Program ID format"),
-    check("name").notEmpty().withMessage("Name is required"),
-    check("age").isInt({ min: 0 }).withMessage("Age must be a positive number"),
-    check("enrollmentDate").isISO8601().withMessage("Invalid enrollment date format"),
-    check("medicalReport").notEmpty().withMessage("Medical report is required"),
-];
-const participantEditValidationRules = [
-    check("id").isUUID().withMessage("Invalid ID format"),
-    check("programId").isUUID().withMessage("Invalid Program ID format"),
     check("name").notEmpty().withMessage("Name is required"),
     check("age").isInt({ min: 0 }).withMessage("Age must be a positive number"),
     check("enrollmentDate").isISO8601().withMessage("Invalid enrollment date format"),
@@ -26,7 +18,7 @@ const participantEditValidationRules = [
 ];
 router.get("/", getParticipantsController);
 router.get("/:id", getParticipantsByIdController);
-router.post("/", participantAddValidationRules, addParticipantController);
-router.put("/:id", participantEditValidationRules, editParticipantController);
+router.post("/", participantValidationRules, addParticipantController);
+router.put("/:id", participantValidationRules, editParticipantController);
 router.delete("/:id", deleteParticipantController);
 export default router;
