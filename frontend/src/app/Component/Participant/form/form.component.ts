@@ -1,23 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { WebService } from '../../../Service/web.service';
+import { AlertService } from '../../../Service/alert.service';
 import { CommonModule } from '@angular/common';
+
 @Component({
-  selector: 'app-form',
-  standalone: true,
-  imports: [CommonModule,RouterModule,ReactiveFormsModule],
+  selector: 'app-participant-form',
   templateUrl: './form.component.html',
-  styleUrl: './form.component.scss'
+  styleUrl: './form.component.scss',
+  standalone:true,
+  imports:[CommonModule,ReactiveFormsModule,RouterModule]
 })
-export class ParticipantFormComponent {
+export class ParticipantFormComponent implements OnInit {
   participantForm: FormGroup;
   participantId: string | null = null;
   programs: any[] = [];
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient,
+    private Service: WebService,
+    private Alert: AlertService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -34,30 +37,50 @@ export class ParticipantFormComponent {
     this.fetchPrograms();
     this.participantId = this.route.snapshot.paramMap.get('id');
     if (this.participantId) {
-      this.http.get(`/api/participants/${this.participantId}`).subscribe((data: any) => {
-        this.participantForm.patchValue(data);
-      });
+      this.getParticipantById(this.participantId);
     }
   }
 
   fetchPrograms() {
-    this.http.get('/api/programs').subscribe((data: any) => {
-      this.programs = data;
+    this.Service.getProgram().subscribe((data: any) => {
+      if(data.success){
+        this.programs = data.payload;
+      } else {
+        this.programs = []
+      }
+    }, error => {
+      this.Alert.error("Failed to load research programs.");
+    });
+  }
+
+  getParticipantById(id: string) {
+    this.Service.getParticipantById(id).subscribe((data: any) => {
+      this.participantForm.patchValue(data);
+    }, error => {
+      this.Alert.error("Failed to fetch participant details.");
     });
   }
 
   saveParticipant() {
     if (this.participantForm.valid) {
+      const formData = this.participantForm.value;      
       if (this.participantId) {
-        this.http.put(`/api/participants/${this.participantId}`, this.participantForm.value).subscribe(() => {
-          this.router.navigate(['/participants']);
+        this.Service.updateParticipant(formData,this.participantId).subscribe(async () => {
+          await this.Alert.success("Participant updated successfully!");
+          this.router.navigate(['/participant']);
+        }, error => {
+          this.Alert.error("Failed to update participant.");
         });
       } else {
-        this.http.post('/api/participants', this.participantForm.value).subscribe(() => {
-          this.router.navigate(['/participants']);
+        this.Service.addParticipant(formData).subscribe(async () => {
+          await this.Alert.success("Participant added successfully!");
+          this.router.navigate(['/participant']);
+        }, error => {
+          this.Alert.error("Failed to add participant.");
         });
       }
+    } else {
+      this.Alert.error("Please fill all required fields correctly.");
     }
   }
-
 }

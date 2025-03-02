@@ -149,20 +149,21 @@ export const deleteProgramController = async (req: Request, res: Response): Prom
 
 export const getParticipantsController = async (req: Request, res: Response): Promise<void> => {
     try {
-        const participants = await getAllParticipants();
+        console.log('working')
+        const participants =  await getAllParticipants();
         res.status(200).json({
             code: 200,
-            payload: participants,
+            payload: [participants],
             success: true,
             message: "Fetched all participants successfully"
         });
-    } catch (error) {
+    } catch (error:any) {
+        console.log(error)
         res.status(500).json({
             code: 500,
-            payload: [],
+            payload: [JSON.stringify(error.message)],
             success: false,
-            message: "Server error",
-            error
+            message: "Server error"
         });
     }
 };

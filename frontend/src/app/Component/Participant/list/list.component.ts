@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { WebService } from '../../../Service/web.service';
 
 interface Participant {
   id: string;
@@ -15,32 +15,40 @@ interface Participant {
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [RouterModule,CommonModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
 })
-export class ParticipantListComponent {
+export class ParticipantListComponent implements OnInit {
   participants: Participant[] = [];
   currentPage = 1;
   itemsPerPage = 5;
   totalPages = 0;
 
-  constructor(private http: HttpClient) {}
+  constructor(private service: WebService) {}
 
   ngOnInit() {
     this.fetchParticipants();
   }
 
   fetchParticipants() {
-    this.http.get<Participant[]>('/api/participants').subscribe((data) => {
-      this.participants = data;
-      this.totalPages = Math.ceil(data.length / this.itemsPerPage);
+    this.service.getParticipant().subscribe((data: any) => {
+      if (data.success) {
+        this.participants = data.payload;
+        this.totalPages = Math.ceil(this.participants.length / this.itemsPerPage);
+      }
     });
   }
 
   deleteParticipant(id: string) {
-    this.http.delete(`/api/participants/${id}`).subscribe(() => {
+    this.service.deleteParticipant(id).subscribe(() => {
       this.participants = this.participants.filter((p) => p.id !== id);
+      this.totalPages = Math.ceil(this.participants.length / this.itemsPerPage);
+      
+      // Adjust current page if the last item on the last page is removed
+      if (this.currentPage > this.totalPages) {
+        this.currentPage = this.totalPages || 1;
+      }
     });
   }
 

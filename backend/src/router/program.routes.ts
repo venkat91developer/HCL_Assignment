@@ -21,7 +21,14 @@ const programValidationRules = [
     check("endDate").isISO8601().withMessage("Invalid end date format"),
     check("budget").isNumeric().withMessage("Budget must be a number"),
 ];
-const participantValidationRules = [
+const participantAddValidationRules = [
+    check("programId").notEmpty().withMessage("Invalid Program ID format"),
+    check("name").notEmpty().withMessage("Name is required"),
+    check("age").isInt({ min: 0 }).withMessage("Age must be a positive number"),
+    check("enrollmentDate").isISO8601().withMessage("Invalid enrollment date format"),
+    check("medicalReport").notEmpty().withMessage("Medical report is required"),
+];
+const participantEditValidationRules = [
     check("id").isUUID().withMessage("Invalid ID format"),
     check("programId").isUUID().withMessage("Invalid Program ID format"),
     check("name").notEmpty().withMessage("Name is required"),
@@ -29,16 +36,15 @@ const participantValidationRules = [
     check("enrollmentDate").isISO8601().withMessage("Invalid enrollment date format"),
     check("medicalReport").notEmpty().withMessage("Medical report is required"),
 ];
-
 // Routes
 router.get("/", getProgramController);
 router.get("/:id", getProgramByIdController);
 router.post("/", programValidationRules, addProgramController);
 router.put("/:id", programValidationRules, editProgramController);
 router.delete("/:id", deleteProgramController);
-router.get("/participant", getParticipantsController);
-router.post("/participant", participantValidationRules, addParticipantController);
-router.put("/participant/:id", participantValidationRules, editParticipantController);
+router.get("/participants", getParticipantsController);
+router.post("/participant", participantAddValidationRules, addParticipantController);
+router.put("/participant/:id", participantEditValidationRules, editParticipantController);
 router.delete("/participant/:id", deleteParticipantController);
 
 export default router;

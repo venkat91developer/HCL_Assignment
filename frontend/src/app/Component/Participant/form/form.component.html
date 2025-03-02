@@ -1,17 +1,43 @@
 <div class="container">
-    <h2 class="title">{{ participantId ? 'Edit' : 'Add' }} Participant</h2>
-  
-    <form [formGroup]="participantForm" (ngSubmit)="saveParticipant()" class="form">
-      <select formControlName="programId" class="input">
-        <option value="">Select Research Program</option>
-        <option *ngFor="let program of programs" [value]="program.id">{{ program.name }}</option>
-      </select>
-      <input type="text" formControlName="name" placeholder="Participant Name" class="input">
-      <input type="number" formControlName="age" placeholder="Age" class="input">
-      <input type="date" formControlName="enrollmentDate" class="input">
-      <textarea formControlName="medicalReport" placeholder="Medical Report" class="input"></textarea>
-  
-      <button type="submit" class="submit-btn">{{ participantId ? 'Update' : 'Create' }} Participant</button>
-    </form>
-  </div>
-  
+  <h2 class="title">{{ participantId ? 'Edit' : 'Add' }} Participant</h2>
+
+  <form [formGroup]="participantForm" (ngSubmit)="saveParticipant()" class="form">
+    
+    <label for="programId">Research Program</label>
+    <select formControlName="programId" class="input">
+      <option value="">Select Research Program</option>
+      <option *ngFor="let program of programs" [value]="program._id">{{ program.name }}</option>
+    </select>
+    <div *ngIf="participantForm.get('programId')?.touched && participantForm.get('programId')?.invalid" class="error">
+      Please select a research program.
+    </div>
+
+    <label for="name">Participant Name</label>
+    <input type="text" formControlName="name" placeholder="Participant Name" class="input">
+    <div *ngIf="participantForm.get('name')?.touched && participantForm.get('name')?.invalid" class="error">
+      Name is required.
+    </div>
+
+    <label for="age">Age</label>
+    <input type="number" formControlName="age" placeholder="Age" class="input">
+    <div *ngIf="participantForm.get('age')?.touched && participantForm.get('age')?.invalid" class="error">
+      Enter a valid age (greater than 0).
+    </div>
+
+    <label for="enrollmentDate">Enrollment Date</label>
+    <input type="date" formControlName="enrollmentDate" class="input">
+    <div *ngIf="participantForm.get('enrollmentDate')?.touched && participantForm.get('enrollmentDate')?.invalid" class="error">
+      Enrollment date is required.
+    </div>
+
+    <label for="medicalReport">Medical Report</label>
+    <textarea formControlName="medicalReport" placeholder="Medical Report" class="input"></textarea>
+    <div *ngIf="participantForm.get('medicalReport')?.touched && participantForm.get('medicalReport')?.invalid" class="error">
+      Medical report is required.
+    </div>
+
+    <button type="submit" class="submit-btn" [disabled]="participantForm.invalid">
+      {{ participantId ? 'Update' : 'Create' }} Participant
+    </button>
+  </form>
+</div>

@@ -31,15 +31,25 @@ export async function getAllPrograms() {
 
 export async function getProgramById(id: string) {
     try {
+        if (!id || !ObjectId.isValid(id)) {
+            throw new Error(`Invalid program ID: ${id}`);
+        }
+
         const db = mongoClient.db(DB_NAME);
         const collection = db.collection(PROGRAM_COLLECTION_NAME);
-        return await collection.findOne({ _id: new ObjectId(id) });
-    } catch (error) {
-        console.error("Error fetching program by ID:", error);
+        
+        const program = await collection.findOne({ _id: new ObjectId(id) });
+
+        if (!program) {
+            throw new Error(`Program not found with ID: ${id}`);
+        }
+
+        return program;
+    } catch (error:any) {
+        console.error("Error fetching program by ID:", error.message);
         throw error;
     }
 }
-
 export async function updateProgram(id: string, updateData: any) {
     try {
         const db = mongoClient.db(DB_NAME);
@@ -80,9 +90,18 @@ export async function getAllParticipants() {
     try {
         const db = mongoClient.db(DB_NAME);
         const collection = db.collection(PARTICIPANT_COLLECTION_NAME);
-        return await collection.find().toArray();
+
+        console.log("Fetching participants from collection:", collection.namespace);
+
+        // Ensure the collection exists before querying
+        if (!collection) {
+            throw new Error("Collection not found");
+        }
+
+        const participants = await collection.find().toArray();
+        return participants;
     } catch (error) {
-        console.error("Error fetching programs:", error);
+        console.error("Error fetching participants:", error);
         throw error;
     }
 }
