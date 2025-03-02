@@ -62,11 +62,14 @@ export async function updateProgram(id: string, updateData: any) {
     }
 }
 
-export async function deleteProgram(id: string) {
+export async function deleteProgram(id: string, deletedBy?: string) {
     try {
         const db = mongoClient.db(DB_NAME);
         const collection = db.collection(PROGRAM_COLLECTION_NAME);
         const result = await collection.deleteOne({ _id: new ObjectId(id) });
+        if (result.deletedCount > 0) {
+            const result = await logAuditEvent("program_deleted", id, "Program", deletedBy);
+        }
         return result;
     } catch (error) {
         console.error("Error deleting program:", error);
