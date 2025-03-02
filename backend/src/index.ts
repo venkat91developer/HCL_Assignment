@@ -6,6 +6,8 @@ import programRoutes from "./router/program.routes";
 import auditRoutes from "./router/audit.routes";
 import userRoutes from "./router/user.routes";
 import participantRoutes from "./router/participant.routes";
+import { authenticateToken } from "./middleware/auth.middleware";
+import authRoutes from "./router/auth.routes";
 
 dotenv.config();
 
@@ -38,6 +40,8 @@ async function startServer() {
         appProgram.locals.mongoDB = mongoDB;
         appProgram.locals.mongoDB = mongoDB;
         appAudit.locals.mysqlPool = mysqlDB;
+        appProgram.use("/api/v1/auth", authRoutes);
+        appProgram.use(authenticateToken);
         appProgram.use("/api/v1/programs", programRoutes);
         appProgram.use("/api/v1/user", userRoutes);
         appProgram.use("/api/v1/participant", participantRoutes);

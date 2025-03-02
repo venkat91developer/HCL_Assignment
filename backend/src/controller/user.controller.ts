@@ -1,6 +1,9 @@
 import { checkUsernameExists, createUserModel, getUserById, validateUserLogin } from "../model/user.model";
 import { ResponseInterface } from "./common.interface";
 import { Request, Response } from "express";
+import * as jwt from "jsonwebtoken";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 export const createUserController = async (req: Request, res: Response): Promise<void> => {
     try {
@@ -26,9 +29,14 @@ export const createUserController = async (req: Request, res: Response): Promise
 export const loginController = async (req: Request, res: Response): Promise<void> => {
     try {
         const userData = await validateUserLogin(req.body.email,req.body.password) ;
+        const token = jwt.sign(
+            { email: req.body.email },
+            process.env.JWT_SECRET as string,
+            { expiresIn: "1h" }
+        );
         const response: ResponseInterface = {
             code: 200,
-            payload: [userData],
+            payload: [userData, token],
             success: true,
             message: "User Login Successfully"
         };
