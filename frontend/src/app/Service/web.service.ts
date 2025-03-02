@@ -50,7 +50,7 @@ export class WebService {
       return this.http.get(`${this.apiUrl}user/checkEmail?email=${email}`);
     }
     login(data:any) {
-      return this.http.post(`${this.apiUrl}user/login`,data);
+      return this.http.post(`${this.apiUrl}auth/login`,data);
     }
     getUserInfo(id:string) {
       return this.http.get(`${this.apiUrl}user/getUser/${id}`);

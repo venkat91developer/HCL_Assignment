@@ -34,16 +34,19 @@ export class LoginComponent {
         password: this.loginForm.get('password')?.value || "",
       };
 
-      this.Service.login(loginData).subscribe((response: any) => {
+      this.Service.login(loginData).subscribe((data: any) => {
         //&& response.token
-        if (response.success ) {
+        if (data.success ) {
+          const response = data.payload[0]
           // localStorage.setItem('token', response.token);
-          localStorage.setItem('user', JSON.stringify(response.user));
-          localStorage.setItem('userToken',"MyTOken")
+          // localStorage.setItem('user', JSON.stringify(response.user));
+          localStorage.setItem('accessToken',response.accessToken)
+          localStorage.setItem('refreshToken',response.refreshToken)
+          
           this.Alert.success("Login successful!");
           this.router.navigateByUrl('/program');
         } else {
-          this.Alert.error(response.message || "Invalid credentials.");
+          this.Alert.error(data.message || "Invalid credentials.");
         }
       }, error => {
         this.Alert.error("Something went wrong. Please try again.");

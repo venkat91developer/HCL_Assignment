@@ -26,7 +26,7 @@ export class HeaderComponent {
     });
   }
   ngDoCheck() {
-    this.isLoggedIn = !!localStorage.getItem('userToken');
+    this.isLoggedIn = !!localStorage.getItem('accessToken');
   }
 
   toggleMenu() {
@@ -36,7 +36,7 @@ export class HeaderComponent {
   async logout() {
     const confirmation = await this.Alert.confirm("Are you sure to logout?")
     if(confirmation){
-      localStorage.removeItem('userToken');
+      localStorage.removeItem('accessToken');
       this.isLoggedIn = false;
       this.router.navigate(['/login']);
     }
