@@ -55,7 +55,7 @@ export class ParticipantFormComponent implements OnInit {
 
   getParticipantById(id: string) {
     this.Service.getParticipantById(id).subscribe((data: any) => {
-      this.participantForm.patchValue(data);
+      this.participantForm.patchValue(data.payload[0]);
     }, error => {
       this.Alert.error("Failed to fetch participant details.");
     });

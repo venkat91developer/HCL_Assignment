@@ -1,15 +1,36 @@
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
-import { insertParticipant, updateParticipant, deleteParticipant, getAllParticipants } from "../model/participant.model";
+import { insertParticipant, updateParticipant, deleteParticipant, getAllParticipants, getParticipantById } from "../model/participant.model";
 import { ResponseInterface } from "./common.interface";
 import { logAuditEvent } from "../model/audit.model";
 
+export const getParticipantsByIdController = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const programs = await getParticipantById(req.params.id);
+        const response: ResponseInterface = {
+            code: 200,
+            payload: [programs],
+            success: true,
+            message: `Get ${req.params.id} Participant successfully`
+        };
+        res.status(200).json(response);
+    } catch (error) {
+        const response: ResponseInterface = {
+            code: 500,
+            payload: [error],
+            success: false,
+            message: "Server error",
+            error
+        };
+        res.status(500).json(response);
+    }
+};
 export const getParticipantsController = async (req: Request, res: Response): Promise<void> => {
     try {
         const participants =  await getAllParticipants();
         res.status(200).json({
             code: 200,
-            payload: [participants],
+            payload: participants,
             success: true,
             message: "Fetched all participants successfully"
         });

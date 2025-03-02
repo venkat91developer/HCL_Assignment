@@ -19,8 +19,8 @@
           <td>{{ participant.enrollmentDate }}</td>
           <td>{{ participant.medicalReport }}</td>
           <td>
-            <a [routerLink]="['/participant/edit', participant.id]" class="edit-btn">Edit</a>
-            <button (click)="deleteParticipant(participant.id)" class="delete-btn">Delete</button>
+            <a [routerLink]="['/participant/edit', participant._id]" class="edit-btn">Edit</a>
+            <button (click)="deleteParticipant(participant._id)" class="delete-btn">Delete</button>
           </td>
         </tr>
       </tbody>

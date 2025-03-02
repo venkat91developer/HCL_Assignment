@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { WebService } from '../../../Service/web.service';
 
 interface Participant {
-  id: string;
+  _id: string;
   programId: string;
   name: string;
   age: number;
@@ -41,15 +41,17 @@ export class ParticipantListComponent implements OnInit {
   }
 
   deleteParticipant(id: string) {
-    this.service.deleteParticipant(id).subscribe(() => {
-      this.participants = this.participants.filter((p) => p.id !== id);
-      this.totalPages = Math.ceil(this.participants.length / this.itemsPerPage);
-      
-      // Adjust current page if the last item on the last page is removed
-      if (this.currentPage > this.totalPages) {
-        this.currentPage = this.totalPages || 1;
-      }
-    });
+    if(id){
+      this.service.deleteParticipant(id).subscribe(() => {
+        this.participants = this.participants.filter((p) => p._id !== id);
+        this.totalPages = Math.ceil(this.participants.length / this.itemsPerPage);
+        
+        // Adjust current page if the last item on the last page is removed
+        if (this.currentPage > this.totalPages) {
+          this.currentPage = this.totalPages || 1;
+        }
+      });
+    }
   }
 
   changePage(page: number) {

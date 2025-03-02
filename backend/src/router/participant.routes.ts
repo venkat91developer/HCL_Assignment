@@ -4,6 +4,7 @@ import {
     addParticipantController,
     deleteParticipantController,
     editParticipantController,
+    getParticipantsByIdController,
     getParticipantsController,
 } from "../controller/participant.controller";
 const router = Router();
@@ -23,8 +24,9 @@ const participantEditValidationRules = [
     check("enrollmentDate").isISO8601().withMessage("Invalid enrollment date format"),
     check("medicalReport").notEmpty().withMessage("Medical report is required"),
 ];
-router.get("/participant", getParticipantsController);
-router.post("/participant", participantAddValidationRules, addParticipantController);
-router.put("/participant/:id", participantEditValidationRules, editParticipantController);
-router.delete("/participant/:id", deleteParticipantController);
+router.get("/", getParticipantsController);
+router.get("/:id", getParticipantsByIdController);
+router.post("/", participantAddValidationRules, addParticipantController);
+router.put("/:id", participantEditValidationRules, editParticipantController);
+router.delete("/:id", deleteParticipantController);
 export default router;
