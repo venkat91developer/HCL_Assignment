@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators, AbstractControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { WebService } from '../../../Service/web.service';
 import { RegisterUserIF } from '../../../Interface/common.interface';
 import { AlertService } from '../../../Service/alert.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+  styleUrl: './register.component.scss',
+  standalone:true,
+  imports:[CommonModule,FormsModule,ReactiveFormsModule,RouterModule]
 })
 export class RegisterComponent {
   registerForm: FormGroup;
@@ -38,7 +41,7 @@ export class RegisterComponent {
 
       // Check if email exists before proceeding
       this.Service.checkEmailExists(data.username).subscribe((response: any) => {
-        if (response.exists) {
+        if (!response.success) {
           this.emailExists = true;
           this.Alert.error("This email is already registered.");
         } else {

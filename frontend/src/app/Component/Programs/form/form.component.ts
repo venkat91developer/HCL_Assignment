@@ -61,7 +61,6 @@ export class ProgramFormComponent {
         this.Service.addProgram(programData).subscribe(async (data) => {
           try {
             const response = data;
-            console.log(response)
             if(response.success) {
               await Swal.fire('',response.message, 'success');
               this.router.navigate(['/program']);

@@ -58,7 +58,6 @@ export class ProgramListComponent {
           this.Service.deleteProgram(id).subscribe(async (data) => {
             try {
               const response = data;
-              console.log(response)
               if(response.success) {
                 await Swal.fire('',response.message, 'success');
                 this.fetchPrograms();

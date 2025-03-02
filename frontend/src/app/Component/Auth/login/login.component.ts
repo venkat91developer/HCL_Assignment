@@ -20,7 +20,7 @@ export class LoginComponent {
   }
   login() {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
+      
     }
   }
 }

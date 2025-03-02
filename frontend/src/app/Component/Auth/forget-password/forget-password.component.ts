@@ -21,7 +21,7 @@ export class ForgetPasswordComponent {
 
   submit() {
     if (this.forgotPasswordForm.valid) {
-      console.log('Password reset link sent to:', this.forgotPasswordForm.value.email);
+      
     }
   }
 }

@@ -29,7 +29,6 @@ export const getProgramController = async (req: Request, res: Response): Promise
 
 export const addProgramController = async (req: Request, res: Response): Promise<void> => {
     const errors = validationResult(req);
-    console.log(errors);
     if (!errors.isEmpty()) {
         res.status(400).json({
             code: 400,

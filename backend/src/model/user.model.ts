@@ -46,7 +46,6 @@ export async function getUserById(id: string) {
 
 export async function validateUserLogin(username: string, password: string) {
   try {
-    console.log('validate function',username,password)
     const db = mongoClient.db(DB_NAME);
     const collection = db.collection(USER_COLLECTION_NAME);
 

@@ -76,7 +76,7 @@ export const checkEmailController = async (req: Request, res: Response): Promise
                 success: false,
                 message: "Email Existing..."
             };
-            res.status(404).json(response);
+            res.status(200).json(response);
         } else {
             const response: ResponseInterface = {
                 code: 200,
