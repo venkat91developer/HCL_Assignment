@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { WebService } from '../../../Service/web.service';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class RegisterComponent {
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private Service: WebService) {
     this.registerForm = this.fb.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
@@ -24,7 +25,7 @@ export class RegisterComponent {
   register() {
     if (this.registerForm.valid) {
       // console.log(this.registerForm.value);
-      this
+      // this.Service.
     }
   }
 }

@@ -37,5 +37,8 @@ export class WebService {
     deleteParticipant(id:any): Observable<any> {
       return this.http.delete(`${this.apiUrl}programs/${id}`);
     }
+    registerUser(data:){
+
+    }
 }
 
