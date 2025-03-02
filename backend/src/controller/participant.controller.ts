@@ -14,7 +14,6 @@ export const getParticipantsController = async (req: Request, res: Response): Pr
             message: "Fetched all participants successfully"
         });
     } catch (error:any) {
-        console.log(error)
         res.status(500).json({
             code: 500,
             payload: [JSON.stringify(error.message)],

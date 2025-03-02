@@ -26,7 +26,6 @@ export const getProgramController = async (req: Request, res: Response): Promise
 };
 
 export const getProgramByIdController = async (req: Request, res: Response): Promise<void> => {
-    console.log('getProgramByIdController')
     try {
         const programs = await getProgramById(req.params.id);
         const response: ResponseInterface = {

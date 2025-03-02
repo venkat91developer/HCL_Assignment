@@ -22,8 +22,6 @@ export async function getAllParticipants() {
         const db = mongoClient.db(DB_NAME);
         const collection = db.collection(PARTICIPANT_COLLECTION_NAME);
 
-        console.log("Fetching participants from collection:", collection.namespace);
-
         // Ensure the collection exists before querying
         if (!collection) {
             throw new Error("Collection not found");

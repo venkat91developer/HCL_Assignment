@@ -38,7 +38,6 @@ async function startServer() {
         appProgram.locals.mongoDB = mongoDB;
         appProgram.locals.mongoDB = mongoDB;
         appAudit.locals.mysqlPool = mysqlDB;
-        console.log('index file')
         appProgram.use("/api/v1/programs", programRoutes);
         appProgram.use("/api/v1/user", userRoutes);
         appProgram.use("/api/v1/participant", participantRoutes);
