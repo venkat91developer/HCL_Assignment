@@ -63,9 +63,10 @@ export async function deleteParticipant(id: string, deletedBy?: string) {
         const db = mongoClient.db(DB_NAME);
         const collection = db.collection(PARTICIPANT_COLLECTION_NAME);
         const result = await collection.deleteOne({ _id: new ObjectId(id) });
-
+        console.log(result);
         if (result.deletedCount > 0) {
-            await logAuditEvent("participant_deleted", id, "Participant", deletedBy);
+            const result = await logAuditEvent("participant_deleted", id, "Participant", deletedBy);
+            console.log('inside',result)
         }
 
         return result;

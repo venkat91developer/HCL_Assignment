@@ -3,7 +3,7 @@
     <a routerLink="/participant/add" class="add-btn">+ Add Participant</a>
   
     <table class="table">
-      <thead>
+      <thead  *ngIf="participants.length!==0">
         <tr>
           <th>Name</th>
           <th>Age</th>
@@ -25,7 +25,9 @@
         </tr>
       </tbody>
     </table>
-  
+    <div *ngIf="participants.length==0" class="no-item">
+      No Participant is available
+    </div>
     <!-- <div class="pagination">
       <button *ngFor="let page of [].constructor(totalPages); let i = index" (click)="changePage(i+1)" [class.active]="currentPage === i+1">
         {{ i + 1 }}

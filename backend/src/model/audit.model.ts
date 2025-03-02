@@ -4,9 +4,9 @@ export async function logAuditEvent(event: string, entityId: string, entityType:
   try {
       const connection = await mysqlPool.getConnection();
       await connection.query(
-          `INSERT INTO audit_log (event, entity_id, entity_type, deletedAt, deletedBy) VALUES (?, ?, ?, NOW(), ?)`,
-          [event, entityId, entityType, deletedBy || "system"]
-      );
+        `INSERT INTO audit_log (event, deletedEntityId, entityType, deletedAt, deletedBy) VALUES (?, ?, ?, NOW(), ?)`,
+        [event, entityId, entityType, deletedBy || "system"]
+    );
       connection.release();
   } catch (error) {
       console.error("❌ Error logging audit event:", error);

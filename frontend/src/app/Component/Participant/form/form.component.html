@@ -19,13 +19,13 @@
     </div>
 
     <label for="age">Age</label>
-    <input type="number" formControlName="age" placeholder="Age" class="input">
+    <input type="number" formControlName="age" placeholder="Age" class="input" min="13" max="85">
     <div *ngIf="participantForm.get('age')?.touched && participantForm.get('age')?.invalid" class="error">
-      Enter a valid age (greater than 0).
+      Enter a valid age (greater than 13+ and less than 85).
     </div>
 
     <label for="enrollmentDate">Enrollment Date</label>
-    <input type="date" formControlName="enrollmentDate" class="input">
+    <input type="date" formControlName="enrollmentDate" class="input" placeholder="Enroll Date">
     <div *ngIf="participantForm.get('enrollmentDate')?.touched && participantForm.get('enrollmentDate')?.invalid" class="error">
       Enrollment date is required.
     </div>

@@ -8,6 +8,13 @@
   
   @apply p-6 bg-white shadow-lg rounded-lg max-w-5xl mx-auto mt-10;
 }
+.no-item {
+  display: flex;
+      min-height: 10em;
+      justify-content: center;
+      align-items: center;
+  @apply text-2xl font-bold mb-4;
+}
 
 .title {
   @apply text-2xl font-bold mb-4;
