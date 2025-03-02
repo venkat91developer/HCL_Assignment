@@ -8,7 +8,7 @@ import userRoutes from "./router/user.routes";
 import participantRoutes from "./router/participant.routes";
 import { authenticateToken } from "./middleware/auth.middleware";
 import authRoutes from "./router/auth.routes";
-
+import { requestLogger } from "./middleware/logger.middleware";
 dotenv.config();
 
 const appProgram = express();
@@ -40,6 +40,8 @@ async function startServer() {
         appProgram.locals.mongoDB = mongoDB;
         appProgram.locals.mongoDB = mongoDB;
         appAudit.locals.mysqlPool = mysqlDB;
+        appProgram.use(requestLogger);
+        appAudit.use(requestLogger);
         appProgram.use("/api/v1/auth", authRoutes);
         appProgram.use(authenticateToken);
         appProgram.use("/api/v1/programs", programRoutes);
