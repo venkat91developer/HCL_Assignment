@@ -64,7 +64,6 @@ export const loginController = async (req: Request, res: Response): Promise<void
         };
         res.status(200).json(response);
     } catch (error) {
-        console.log(error);
         const response: ResponseInterface = {
             code: 500,
             payload: [],

@@ -43,9 +43,9 @@ async function startServer() {
         appProgram.use(requestLogger);
         appAudit.use(requestLogger);
         appProgram.use("/api/v1/auth", authRoutes);
+        appProgram.use("/api/v1/user", userRoutes);
         appProgram.use(authenticateToken);
         appProgram.use("/api/v1/programs", programRoutes);
-        appProgram.use("/api/v1/user", userRoutes);
         appProgram.use("/api/v1/participant", participantRoutes);
 
         appAudit.use("/api/v1/audit-logs", auditRoutes);
